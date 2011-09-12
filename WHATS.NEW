@@ -1,0 +1,82 @@
+ALEX -- (AL)legro (EX)tras, by Scott Deming
+-----------------------------------------------------------------------------
+Check "http://www.concentric.net/~sdeming" for the latest updates.  You can
+email me at "sdeming@concentric.net" as well.
+-----------------------------------------------------------------------------
+
+Please keep in mind that a lot of things will be changing significantly as
+pieces come together.  As I try out different approaches to solve different
+problems some functions may come and go without much notice.
+
+**************
+** 02-12-97 **
+**************
+- Added a MAP_OBJECT structure (typedef'd), so adding objects to a map is
+  a snap now, though the map routines don't handle any drawing or anything
+  like that yet.  I think the object drawing routines might be too specific
+  to the application, so perhaps just a few example programs demonstrating
+  the different ways would be more appropriate for that.  The object is
+  really just a worldx/worldy pair designating the current location in the
+  world, and a couple of flags.
+- Added create_map_object(), destroy_map_object(), move_map_object(),
+  set_map_object() functions.
+- move_map_object() checks the "is_blockable" flag in the MAP_OBJECT to
+  be moved and disallows the move if the new location is a blocking tile.
+  At the moment all tiles with a type != 0 are blockable.  This is temporary
+  for testing, and will be more specific in the future.
+- Extensively modified examples\ex4.c to reflect the new MAP_OBJECT.  Maps
+  are becoming more and more complete each day.
+
+**************
+** 02-11-97 **
+**************
+- Map tile width and height now must be powers of two, but they don't have
+  to be the same.  IE you can have 8x8, 8x16, 16x16, 16x32, 32x32 etc sized
+  tiles.  This was necessary to remove a lot of muls and divs in the inner
+  loop of the map rendering routine.  It seems to have sped it up.
+- Added "getbitcount()" function to sptypes.c.  This will return the number
+  of bits a number uses (ie 8 returns 4, 16 returns 5 etc.)
+
+**************
+** 02-10-97 **
+**************
+- Changed the map routines once again.	Removed the "MD_????" drawing types
+  and now only support one method of tile drawing.	We now use the RLE_SPRITE
+  structure for tiles so we need to use the draw_rle_sprite() function to
+  draw each tile.  This opened the doors for using the draw_lit_rle_sprite()
+  function for shading the not-so-easy-to-see tiles.
+- Now using the beta version of Allegro 2.2 (available on the Allegro website)
+
+**************
+** 02-08-97 **
+**************
+- Enhanced the line of sight routines to support shading of tyles based on
+  the opacity level of all blocking tiles.	As the line of sight is scanned
+  the type of each tile it passes through is added to give the final result
+  of the shading.  Shading levels can be any number simply by setting the
+  MAP_NUMSHADES definition which is found in "alex.h"  In the future I will
+  make this number variable for each map, and the tile types won't necessarily
+  be what defines the shading level.  But, we need a new map editor for that
+  to work out.
+
+**************
+** 02-07-97 **
+**************
+- Added line of sight routines for the tile mapping.  Simple black filled
+  rectangles block sight past any tiles whose type is != 0.
+
+**************
+** 02-06-97 **
+**************
+- Added very simply window management routines using a display list.
+- Added several windows events for mouse clicks, moves, etc.  These are
+  implemented by assinging a function to the event, ie
+
+	window->on_lclick = on_lclick;
+
+  See ex3.c for an example.
+
+**************
+** 02-05-96 **
+**************
+- First development release of ALEX.
