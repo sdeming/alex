@@ -1,3 +1,14 @@
+I just recovered this from archive.org.
+
+Specifically: 
+http://web.archive.org/web/19981203034951/http://www.concentric.net/~sdeming/
+
+It's an old project I started in 1996. It never aged much from there but it 
+was actually used in a pacman like game developed by someone else.
+
+=============================================================================
+
+
 ALEX -- (AL)legro (EX)tras, by Scott Deming
 -----------------------------------------------------------------------------
 Special thanks to Shawn Hargreaves for making Allegro, and DJ Delorie
